@@ -8,3 +8,6 @@
 # Generated
 /build/
 /reports/
+
+# WebStorm files
+.idea
