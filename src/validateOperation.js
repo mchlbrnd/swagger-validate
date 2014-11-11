@@ -8,10 +8,10 @@ var errorTypes = require('./errorTypes'),
 
 function validateOperation(candidate, operation, models){
   var errors = [];
-  
-  var presentParams = operation.parameters.filter(function(param){
+
+  var presentParams = (operation.parameters || []).filter(function(param){
     if (candidate[param.name] !== undefined) return true;
-    
+
     if (param.required) {
       var error = new MissingValueError();
       errors.push(new ValidationError(param.name, param, error));
@@ -26,7 +26,7 @@ function validateOperation(candidate, operation, models){
       errors.push(new ValidationError(param.name, param, error));
     }
   });
-  
+
   if(errors.length){
     return new ValidationErrors(candidate, operation.nickname, operation, errors);
   }
