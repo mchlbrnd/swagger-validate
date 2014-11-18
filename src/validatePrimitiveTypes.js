@@ -2,12 +2,10 @@
 
 var errorTypes = require('./errorTypes');
 
-function validateDate(candidate, dataType) {
-  var error = validateDate(candidate, dataType);
-  if(error) return error;
+function validateDate(candidate) {
+  var date = new Date(candidate);
 
-  var date = Date.parse(candidate);
-  if(date instanceof Date){
+  if(!(date instanceof Date)) {
     return new errorTypes.DataTypeValidationError(candidate);
   }
 }
