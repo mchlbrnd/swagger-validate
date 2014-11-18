@@ -2,6 +2,17 @@
 
 var errorTypes = require('./errorTypes');
 
+function validateDate(candidate, dataType) {
+  var error = validateDate(candidate, dataType);
+  if(error) return error;
+
+  var date = Date.parse(candidate);
+  if(date instanceof Date){
+    return new errorTypes.DataTypeValidationError(candidate);
+  }
+}
+exports.validateDate = validateDate;
+
 function validateInteger(candidate, dataType){
   var error = validateNumber(candidate, dataType);
   if(error) return error;
@@ -16,11 +27,11 @@ function validateNumber(candidate, dataType){
   if(!(typeof candidate === 'number' || candidate instanceof Number) || isNaN(candidate)){
     return new errorTypes.NotANumberError(candidate, typeof candidate);
   }
-  
+
   if((dataType.minimum !== undefined) && candidate < parseInt(dataType.minimum, 10)){
     return new errorTypes.NumberTooSmallError(candidate, dataType.minimum);
   }
-  
+
   if((dataType.maximum !== undefined) && candidate > parseInt(dataType.maximum, 10)){
     return new errorTypes.NumberTooLargeError(candidate, dataType.maximum);
   }

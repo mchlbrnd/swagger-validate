@@ -8,6 +8,7 @@ var primitives = require('./validatePrimitiveTypes');
 exports.primitive = {
   integer: primitives.validateInteger,
   number: primitives.validateNumber,
+  date: primitives.validateDate,
   string: primitives.validateString,
   boolean: primitives.validateBoolean,
   void: primitives.validateVoid,
