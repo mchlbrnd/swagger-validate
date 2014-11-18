@@ -23,7 +23,7 @@ function validateDataType(candidate, dataType, models){
     case 'File':
       return validate.primitive.file();
     case 'date':
-      return validate.date(candidate, dataType);
+      return validate.primitive.date(candidate, dataType);
     default:
       // Assumed to be complex model
       var model = models[type];
